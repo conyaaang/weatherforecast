@@ -1,0 +1,12 @@
+<div class="weather-wrapper">
+  <h2 *ngIf="weatherData">Weather in {{ weatherData.name }}</h2>
+
+  <div *ngIf="weatherData">
+    <p><strong>Temperature:</strong> {{ weatherData.main.temp }}°C</p>
+    <p><strong>Condition:</strong> {{ weatherData.weather[0].description }}</p>
+    <p><strong>Humidity:</strong> {{ weatherData.main.humidity }}%</p>
+    <p><strong>Wind:</strong> {{ weatherData.wind.speed }} m/s</p>
+  </div>
+
+  <p class="text-danger" *ngIf="errorMessage">{{ errorMessage }}</p>
+</div>

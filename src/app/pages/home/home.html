@@ -1,0 +1,13 @@
+<div class="home-wrapper" *ngIf="auth.user$ | async as user">
+  <p>{{ user.name }}</p>
+  <p><a [href]="user['html_url']" target="_blank">{{ user['html_url'] }}</a></p>
+
+  <input
+    type="text"
+    class="form-control w-50"
+    placeholder="City"
+    [(ngModel)]="city"
+  />
+
+  <button class="btn btn-primary mt-3" (click)="displayWeather()">Display Weather</button>
+</div>

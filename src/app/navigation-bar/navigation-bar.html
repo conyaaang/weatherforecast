@@ -1,0 +1,16 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light px-4 w-100 d-flex justify-content-between align-items-center">
+  <span class="navbar-brand">🌤 Weather Forecastsss</span>
+
+  <button class="btn btn-outline-danger"
+          *ngIf="auth.isAuthenticated$ | async"
+          (click)="logout()">Logout</button>
+</nav>
+
+<div class="landing-wrapper" *ngIf="!(auth.isAuthenticated$ | async)">
+  <p>
+    Welcome to the weather forecast web application. <br>
+    Please login with your GitHub user to use the application and view the weather in your city.
+  </p>
+
+  <button class="btn btn-primary" (click)="login()">Login</button>
+</div>
