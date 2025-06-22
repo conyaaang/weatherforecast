@@ -30,19 +30,30 @@ export class WeatherComponent implements OnInit {
   }
 
   fetchWeather(city: string): void {
-  const apiKey = environment.weatherApiKey;
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+    const apiKey = environment.weatherApiKey;
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
-  this.http.get(url).subscribe({
-    next: data => {
-      this.weatherData = data;
-      this.errorMessage = '';
-    },
-    error: err => {
-      this.weatherData = null;
-      this.errorMessage = 'Weather data not found for "' + city + '".';
-    }
-  });
+    this.http.get(url).subscribe({
+      next: data => {
+        this.weatherData = data;
+        this.errorMessage = '';
+      },
+      error: err => {
+        this.weatherData = null;
+        this.errorMessage = 'Weather data not found for "' + city + '".';
+      }
+    });
+  }
+
+  getCurrentDate(): string {
+  const today = new Date();
+  return `${(today.getMonth() + 1).toString().padStart(2, '0')}/` +
+         `${today.getDate().toString().padStart(2, '0')}/` +
+         today.getFullYear();
 }
 
+  toFahrenheit(celsius: number): number {
+    return Math.round((celsius * 9/5) + 32);
+  }
 }
+

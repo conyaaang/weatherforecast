@@ -1,9 +1,24 @@
 import { inject } from '@angular/core';
-import { CanActivateFn } from '@angular/router';
+import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
-import { map } from 'rxjs/operators';
+import { combineLatest, of } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 
 export const authGuard: CanActivateFn = () => {
   const auth = inject(AuthService);
-  return auth.isAuthenticated$.pipe(map(isAuth => isAuth));
+  const router = inject(Router);
+
+  return combineLatest([auth.isLoading$, auth.isAuthenticated$]).pipe(
+    map(([loading, isAuth]) => {
+      if (!loading && !isAuth) {
+        router.navigate(['/']); // Only redirect when not loading & not authenticated
+        return false;
+      }
+      return isAuth;
+    }),
+    catchError(() => {
+      router.navigate(['/']);
+      return of(false);
+    })
+  );
 };

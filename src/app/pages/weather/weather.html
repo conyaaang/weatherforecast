@@ -1,12 +1,27 @@
-<div class="weather-wrapper">
-  <h2 *ngIf="weatherData">Weather in {{ weatherData.name }}</h2>
-
-  <div *ngIf="weatherData">
-    <p><strong>Temperature:</strong> {{ weatherData.main.temp }}°C</p>
-    <p><strong>Condition:</strong> {{ weatherData.weather[0].description }}</p>
-    <p><strong>Humidity:</strong> {{ weatherData.main.humidity }}%</p>
-    <p><strong>Wind:</strong> {{ weatherData.wind.speed }} m/s</p>
-  </div>
-
-  <p class="text-danger" *ngIf="errorMessage">{{ errorMessage }}</p>
+<div class="weather-wrapper" *ngIf="weatherData">
+  <h2>Weather Forecast</h2>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Date (mm/dd/yyyy)</th>
+        <th>Temp (F)</th>
+        <th>Description</th>
+        <th>Main</th>
+        <th>Pressure</th>
+        <th>Humidity</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ getCurrentDate() }}</td>
+        <td>{{ toFahrenheit(weatherData.main.temp) }}</td>
+        <td>{{ weatherData.weather[0].description }}</td>
+        <td>{{ weatherData.weather[0].main }}</td>
+        <td>{{ weatherData.main.pressure }}</td>
+        <td>{{ weatherData.main.humidity }}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
+
+<p *ngIf="errorMessage" class="text-danger">{{ errorMessage }}</p>

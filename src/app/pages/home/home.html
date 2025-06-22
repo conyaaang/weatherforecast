@@ -1,6 +1,11 @@
 <div class="home-wrapper" *ngIf="auth.user$ | async as user">
-  <p>{{ user.name }}</p>
-  <p><a [href]="user['html_url']" target="_blank">{{ user['html_url'] }}</a></p>
+  <h2>Welcome, {{ user.name }}</h2>
+  
+  <p>
+    <a [href]="'https://github.com/' + user.nickname" target="_blank">
+      https://github.com/{{ user.nickname }}
+    </a>
+  </p>
 
   <input
     type="text"
@@ -9,5 +14,7 @@
     [(ngModel)]="city"
   />
 
-  <button class="btn btn-primary mt-3" (click)="displayWeather()">Display Weather</button>
+  <button class="btn btn-primary mt-3" (click)="displayWeather()">
+    Display Weather
+  </button>
 </div>

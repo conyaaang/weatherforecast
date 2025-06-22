@@ -22,3 +22,11 @@ nav {
 .landing-wrapper button {
   margin-top: 1rem;
 }
+
+nav.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000; /* keeps it above other content */
+}
+
