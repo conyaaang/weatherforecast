@@ -1,18 +1,19 @@
-.home-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  height: calc(100vh - 56px);
-  text-align: center;
-  padding: 1rem;
+input.form-control {
+  border-radius: 20px;
 }
 
-input {
-  max-width: 300px;
+button.btn {
+  font-weight: bold;
+  border-radius: 8px;
 }
 
-button {
-  margin-top: 1rem;
+.city-input-wrapper {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.city-input-wrapper {
+  max-width: 400px;
+  width: 100%;
+  margin-top: 5%;
 }

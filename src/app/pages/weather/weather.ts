@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-weather',
   standalone: true,
-  imports: [CommonModule, HttpClientModule],
+  imports: [CommonModule],
   templateUrl: './weather.html',
   styleUrls: ['./weather.css']
 })
@@ -16,7 +17,7 @@ export class WeatherComponent implements OnInit {
   weatherData: any = null;
   errorMessage: string = '';
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) {}
+  constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
@@ -46,14 +47,18 @@ export class WeatherComponent implements OnInit {
   }
 
   getCurrentDate(): string {
-  const today = new Date();
-  return `${(today.getMonth() + 1).toString().padStart(2, '0')}/` +
-         `${today.getDate().toString().padStart(2, '0')}/` +
-         today.getFullYear();
-}
+    const today = new Date();
+    return `${(today.getMonth() + 1).toString().padStart(2, '0')}/` +
+      `${today.getDate().toString().padStart(2, '0')}/` +
+      today.getFullYear();
+  }
 
   toFahrenheit(celsius: number): number {
-    return Math.round((celsius * 9/5) + 32);
+    return Math.round((celsius * 9 / 5) + 32);
+  }
+
+  goBack(): void {
+    this.router.navigate(['/home']);
   }
 }
 

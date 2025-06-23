@@ -3,5 +3,8 @@
     Welcome to the weather forecast web application.<br />
     Please log in with your GitHub account to continue.
   </p>
-  <button class="btn btn-primary" (click)="login()">Login</button>
+  <button class="btn btn-primary" *ngIf="!(auth.isAuthenticated$ | async)" (click)="login()">
+    Login
+  </button>
+
 </div>

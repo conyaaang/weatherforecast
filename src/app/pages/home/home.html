@@ -1,20 +1,26 @@
-<div class="home-wrapper" *ngIf="auth.user$ | async as user">
-  <h2>Welcome, {{ user.name }}</h2>
-  
+<div
+  *ngIf="auth.user$ | async as user"
+  class="d-flex flex-column align-items-center justify-content-center vh-100 text-center"
+>
+  <h2>Welcome, {{ user.name }}!</h2>
   <p>
+    GitHub Profile:
     <a [href]="'https://github.com/' + user.nickname" target="_blank">
       https://github.com/{{ user.nickname }}
     </a>
   </p>
 
-  <input
-    type="text"
-    class="form-control w-50"
-    placeholder="City"
-    [(ngModel)]="city"
-  />
+  <div class="input-group my-4 city-input-wrapper">
+    <span class="input-group-text">
+      <i class="bi bi-search"></i>
+    </span>
+    <input
+      type="text"
+      class="form-control"
+      placeholder="City"
+      [(ngModel)]="city"
+    />
+  </div>
 
-  <button class="btn btn-primary mt-3" (click)="displayWeather()">
-    Display Weather
-  </button>
+  <button class="btn btn-dark px-4" (click)="displayWeather()">Display Weather</button>
 </div>
